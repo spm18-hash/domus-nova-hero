@@ -1,0 +1,49 @@
+---
+import Layout from "~/src/layouts/Layout.astro";
+import Nav from "~/src/components/Nav.astro";
+import HomeAbout from "~/src/components/HomeAbout.astro";
+
+import Carousel from "~/src/components/Carousel.svelte";
+
+import { getImage } from "astro:assets";
+
+import CarouselOne from "~/src/assets/carousel_one.jpg";
+import CarouselTwo from "~/src/assets/carousel_two.jpg";
+import CarouselThree from "~/src/assets/carousel_three.jpg";
+import CarouselFour from "~/src/assets/carousel_four.jpg";
+import CarouselFive from "~/src/assets/carousel_five.jpg";
+import CarouselSix from "~/src/assets/carousel_six.jpg";
+import CarouselSeven from "~/src/assets/carousel_seven.jpg";
+import CarouselEight from "~/src/assets/carousel_eight.jpg";
+import CarouselNine from "~/src/assets/carousel_nine.jpg";
+import CarouselTen from "~/src/assets/carousel_ten.jpg";
+
+const images = await Promise.all(
+    [
+        { src: CarouselOne, alt: "Carousel One" },
+        { src: CarouselTwo, alt: "Carousel Two" },
+        { src: CarouselThree, alt: "Carousel Three" },
+        { src: CarouselFour, alt: "Carousel Four" },
+        { src: CarouselFive, alt: "Carousel Five" },
+        { src: CarouselSix, alt: "Carousel Six" },
+        { src: CarouselSeven, alt: "Carousel Seven" },
+        { src: CarouselEight, alt: "Carousel Eight" },
+        { src: CarouselNine, alt: "Carousel Nine" },
+        { src: CarouselTen, alt: "Carousel Ten" },
+    ].map(async ({ src, alt }) => ({
+        ...(await getImage({
+            src,
+            format: "avif",
+            quality: 40,
+            widths: [360, 480, 640, 768, 1024],
+        })),
+        alt,
+    })),
+);
+---
+
+<Layout>
+    <Nav />
+    <Carousel images={images} client:idle />
+    <HomeAbout />
+</Layout>
