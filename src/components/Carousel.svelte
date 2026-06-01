@@ -144,6 +144,7 @@
                         class="block w-full object-cover max-sm:aspect-square sm:aspect-64/45 lg:aspect-video"
                         src={image.src}
                         fetchpriority={i === 0 ? "high" : "auto"}
+                        loading={i === 0 ? "eager" : "lazy"}
                         srcset={image.srcSet.attribute}
                         sizes="(min-width: 1024px) 60vw, 100vw"
                         alt={image.attributes.alt}
